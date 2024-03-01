@@ -272,12 +272,16 @@ class Quote extends CI_Controller
         $data = array();
         $no = $this->input->post('start');
         foreach ($list as $invoices) {
-            
+            $employee = ($this->employee->employee_name($invoices->eid));
+            $sale_support = $this->employee->employee_name($invoices->parent_eid);
+
             $no++;
             $row = array();
             $row[] = $no;
             $row[] = '<a href="' . base_url("quote/view?id=$invoices->id") . '">&nbsp; ' . $invoices->tid . '</a>';
             $row[] = $invoices->name;
+            $row[] = (!empty($employee) || $employee != NULL ) ? $employee['name'] : "";
+            $row[] = (!empty($sale_support) || $sale_support != NULL) ? $sale_support['name'] : "";
             $row[] = dateformat($invoices->invoicedate);
             $row[] = amountExchange($invoices->total, 0, $this->aauth->get_user()->loc);
             $row[] = '<span class="badge st-' . $invoices->status . '">' . $this->lang->line(ucwords($invoices->status)) . '</span>';
