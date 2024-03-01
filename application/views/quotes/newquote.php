@@ -1,3 +1,12 @@
+<style>
+    input[disabled] {
+    background-color: #f2f2f2; 
+    color: #999;
+    border: 1px solid #ccc; 
+    cursor: not-allowed; 
+    opacity: 0.6; 
+}
+</style>
 <div class="content-body">
     <div class="card">
         <div class="card-content">
@@ -194,14 +203,14 @@
                                 <td><input type="text" class="form-control req amnt" name="product_qty[]" id="amount-0"
                                            onkeypress="return isNumber(event)" onkeyup="rowTotal('0'), billUpyog()"
                                            autocomplete="off" value="1"></td>
-                                <td><input type="text" class="form-control req prc" name="product_price[]" id="price-0"
+                                <td><input type="text" class="form-control req prc" <?= $check_role_price?> name="product_price[]" id="price-0"
                                            onkeypress="return isNumber(event)" onkeyup="rowTotal('0'), billUpyog()"
                                            autocomplete="off"></td>
                                 <td><input type="text" class="form-control vat " name="product_tax[]" id="vat-0"
                                            onkeypress="return isNumber(event)" onkeyup="rowTotal('0'), billUpyog()"
                                            autocomplete="off"></td>
                                 <td class="text-center" id="texttaxa-0">0</td>
-                                <td><input type="text" class="form-control discount" name="product_discount[]"
+                                <td><input type="text" class="form-control discount" <?= $check_role_discount?> name="product_discount[]"
                                            onkeypress="return isNumber(event)" id="discount-0"
                                            onkeyup="rowTotal('0'), billUpyog()" autocomplete="off"></td>
                                 <td><span class="currenty"><?php echo $this->config->item('currency'); ?></span>
@@ -566,7 +575,18 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $("#addproduct").click(function (e) {
+            <?php if($check_role_price == "disabled"){?>
+                $('input[name="product_price[]"]').prop('disabled', true);
+            <?php }?>
+            <?php if($check_role_discount == "disabled"){?>
+                $('input[name="product_discount[]"]').prop('disabled', true);
+            <?php }?>
+        });
+    });
+</script>
 <script type="text/javascript">
     $(function () {
         $('.summernote').summernote({

@@ -200,14 +200,14 @@
                         <td><input type="text" class="form-control req amnt" name="product_qty[]" id="amount-' . $i . '"
                                    onkeypress="return isNumber(event)" onkeyup="rowTotal(' . $i . '), billUpyog()"
                                    autocomplete="off" value="' . amountFormat_general($row['qty']) . '" ><input type="hidden" name="old_product_qty[]" value="' . amountFormat_general($row['qty']) . '" ></td>
-                        <td><input type="text" class="form-control req prc" name="product_price[]" '.$check_role.' id="price-' . $i . '"
+                        <td><input type="text" class="form-control req prc" name="product_price[]" '.$check_role_price.' id="price-' . $i . '"
                                    onkeypress="return isNumber(event)" onkeyup="rowTotal(' . $i . '), billUpyog()"
                                    autocomplete="off" value="' . amountExchange_s($row['price'], $invoice['multi'], $this->aauth->get_user()->loc) . '"></td>
                         <td> <input type="text" class="form-control vat" name="product_tax[]" id="vat-' . $i . '"
                                     onkeypress="return isNumber(event)" onkeyup="rowTotal(' . $i . '), billUpyog()"
                                     autocomplete="off"  value="' . amountFormat_general($row['tax']) . '"></td>
                         <td class="text-center" id="texttaxa-' . $i . '">' . amountExchange_s($row['totaltax'], $invoice['multi'], $this->aauth->get_user()->loc) . '</td>
-                        <td><input type="text" class="form-control discount" '.$check_role.' name="product_discount[]"
+                        <td><input type="text" class="form-control discount" '.$check_role_discount.' name="product_discount[]"
                                    onkeypress="return isNumber(event)" id="discount-' . $i . '"
                                    onkeyup="rowTotal(' . $i . '), billUpyog()" autocomplete="off"  value="' . amountFormat_general($row['discount']) . '"></td>
                         <td><span class="currenty">' . $this->config->item('currency') . '</span>
@@ -422,7 +422,7 @@
                                    class="form-control margin-bottom" name="country" id="mcustomer_country">
                         </div>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="PostBox"
+                            <input type="text" placeholder="<?php echo $this->lang->line('PostBox'); ?>"
                                    class="form-control margin-bottom" name="postbox">
                         </div>
                     </div>

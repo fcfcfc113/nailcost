@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'http://localhost/nailcost/public_html/';
+$config['base_url'] = 'http://localhost/nailcost/';
 
 /*
 |--------------------------------------------------------------------------

@@ -65,6 +65,9 @@ class Quote extends CI_Controller
         $head['usernm'] = $this->aauth->get_user()->username;
         $data['warehouse'] = $this->quote->warehouses();
         $data['taxdetails'] = $this->common->taxdetail();
+        $role_id = $this->aauth->get_user()->roleid;
+        $data['check_role_discount'] = ($role_id == 2) ? "disabled" : "" ;
+        $data['check_role_price'] = ($role_id == 2 || $role_id == 3 ) ? "disabled" : "" ;
         $this->load->view('fixed/header', $head);
         $this->load->view('quotes/newquote', $data);
         $this->load->view('fixed/footer');
@@ -81,7 +84,9 @@ class Quote extends CI_Controller
         $data['invoice'] = $this->quote->quote_details($tid);
         $data['products'] = $this->quote->quote_products($tid);
         $data['currency'] = $this->quote->currencies();
-        $data['check_role'] = ($this->aauth->get_user()->roleid) ? "disabled" : "" ;
+        $role_id = $this->aauth->get_user()->roleid;
+        $data['check_role_discount'] = ($role_id == 2) ? "disabled" : "" ;
+        $data['check_role_price'] = ($role_id == 2 || $role_id == 3 ) ? "disabled" : "" ;
         $head['title'] = "Edit Quote #" . $data['invoice']['tid'];
         $head['usernm'] = $this->aauth->get_user()->username;
         $data['warehouse'] = $this->quote->warehouses();
