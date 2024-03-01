@@ -45,6 +45,8 @@
                         <th><?php echo $this->lang->line('No') ?></th>
                         <th><?php echo $this->lang->line('Quote') ?>#</th>
                         <th><?php echo $this->lang->line('Customer') ?></th>
+                        <th><?php echo $this->lang->line('Employees') ?></th>
+                        <th><?php echo $this->lang->line('Sale Support') ?></th>
                         <th><?php echo $this->lang->line('Date') ?></th>
                         <th><?php echo $this->lang->line('Total') ?></th>
                         <th><?php echo $this->lang->line('Status') ?></th>
@@ -61,6 +63,8 @@
                         <th><?php echo $this->lang->line('No') ?></th>
                         <th><?php echo $this->lang->line('Quote') ?>#</th>
                         <th><?php echo $this->lang->line('Customer') ?></th>
+                        <th><?php echo $this->lang->line('Employees') ?></th>
+                        <th><?php echo $this->lang->line('Sale Support') ?></th>
                         <th><?php echo $this->lang->line('Date') ?></th>
                         <th><?php echo $this->lang->line('Total') ?></th>
                         <th><?php echo $this->lang->line('Status') ?></th>

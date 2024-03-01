@@ -33,3 +33,4 @@ define('CUSTOM', '1');
 define('MENU', '0');
 define('PAC', '1');
 define('EMPS', '1');
+define('SALE_SUPPORT',18);

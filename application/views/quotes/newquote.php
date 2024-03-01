@@ -276,13 +276,24 @@
                                        echo $this->lang->line('Employee')
                                 ?><br>
                                     <select name="employee"
-                                            class=" mt-1 col form-control form-control-sm">
+                                            class=" selectpicker form-control ">
 
                                         <?php foreach ($employee as $row) {
                                             echo '<option value="' . $row['id'] . '">' . $row['name'] . ' (' . $row['name'] . ')</option>';
                                         } ?>
 
-                                    </select><?php } ?><br><?php if ($exchange['active'] == 1){
+                                    </select>
+
+                                    <br>
+                                    Sale Support
+                                    <select name="sale_support" id="sale_support" class=" selectpicker form-control">
+                                        <option value="0"></option>
+                                        <?php foreach ($list_sale_support as $row) {?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                        <?php }?>
+                                    </select>
+                                    
+                                    <?php } ?><br><?php if ($exchange['active'] == 1){
                                     echo $this->lang->line('Payment Currency client') . ' <small>' . $this->lang->line('based on live market') ?></small>
                                     <select name="mcurrency"
                                             class="selectpicker form-control">

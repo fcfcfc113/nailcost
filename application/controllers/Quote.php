@@ -25,6 +25,8 @@ class Quote extends CI_Controller
         parent::__construct();
         $this->load->model('quote_model', 'quote');
         $this->load->model('plugins_model', 'plugins');
+        $this->load->model('employee_model', 'employee');
+
         $this->load->library("Aauth");
         
         if (!$this->aauth->is_loggedin()) {
@@ -49,7 +51,6 @@ class Quote extends CI_Controller
         $this->load->model('plugins_model', 'plugins');
         $data['emp'] = $this->plugins->universal_api(69);
         if ($data['emp']['key1']) {
-            $this->load->model('employee_model', 'employee');
             $data['employee'] = $this->employee->list_employee();
         }
         $this->load->library("Common");
@@ -68,6 +69,7 @@ class Quote extends CI_Controller
         $role_id = $this->aauth->get_user()->roleid;
         $data['check_role_discount'] = ($role_id == 2) ? "disabled" : "" ;
         $data['check_role_price'] = ($role_id == 2 || $role_id == 3 ) ? "disabled" : "" ;
+        $data['list_sale_support'] =  $this->employee->employee_sale_support();
         $this->load->view('fixed/header', $head);
         $this->load->view('quotes/newquote', $data);
         $this->load->view('fixed/footer');
@@ -124,7 +126,7 @@ class Quote extends CI_Controller
         $shipping = rev_amountExchange_s($this->input->post('shipping'), $currency, $this->aauth->get_user()->loc);
         $shipping_tax = rev_amountExchange_s($this->input->post('ship_tax'), $currency, $this->aauth->get_user()->loc);
         $ship_taxtype = $this->input->post('ship_taxtype');
-
+        $sale_support = $this->input->post('sale_support');
 
         if ($ship_taxtype == 'incl') $shipping = $shipping - $shipping_tax;
         $refer = $this->input->post('refer');
@@ -162,7 +164,30 @@ class Quote extends CI_Controller
         //Invoice Data
         $bill_date = datefordatabase($invoicedate);
         $bill_due_date = datefordatabase($invocieduedate);
-        $data = array('tid' => $invocieno, 'invoicedate' => $bill_date, 'invoiceduedate' => $bill_due_date, 'subtotal' => $subtotal, 'shipping' => $shipping, 'ship_tax' => $shipping_tax, 'ship_tax_type' => $ship_taxtype, 'discount' => $total_discount, 'tax' => $total_tax, 'total' => $total, 'notes' => $notes, 'csd' => $customer_id, 'eid' => $emp, 'taxstatus' => $tax, 'discstatus' => $discstatus, 'format_discount' => $discountFormat, 'refer' => $refer, 'term' => $pterms, 'proposal' => $proposal, 'multi' => $currency, 'loc' => $this->aauth->get_user()->loc);
+        $data = array(
+            'tid' => $invocieno, 
+            'invoicedate' => $bill_date, 
+            'invoiceduedate' => $bill_due_date, 
+            'subtotal' => $subtotal, 
+            'shipping' => $shipping, 
+            'ship_tax' => $shipping_tax, 
+            'ship_tax_type' => $ship_taxtype, 
+            'discount' => $total_discount, 
+            'tax' => $total_tax, 
+            'total' => $total, 
+            'notes' => $notes, 
+            'csd' => $customer_id, 
+            'eid' => $emp,
+            'parent_eid'=> ($sale_support > 0 ) ? $sale_support : NULL,
+            'taxstatus' => $tax, 
+            'discstatus' => $discstatus, 
+            'format_discount' => $discountFormat,
+            'refer' => $refer, 
+            'term' => $pterms, 
+            'proposal' => $proposal, 
+            'multi' => $currency, 
+            'loc' => $this->aauth->get_user()->loc
+        );
         if ($this->db->insert('geopos_quotes', $data)) {
             $pid = $this->input->post('pid');
             $invocieno = $this->db->insert_id();
@@ -247,6 +272,7 @@ class Quote extends CI_Controller
         $data = array();
         $no = $this->input->post('start');
         foreach ($list as $invoices) {
+            
             $no++;
             $row = array();
             $row[] = $no;

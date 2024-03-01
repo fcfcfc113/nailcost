@@ -61,6 +61,22 @@ class Employee_model extends CI_Model
         return $query->row_array();
     }
 
+    public function employee_name($id){
+        $this->db->select('geopos_employees.id,geopos_employees.name');
+        $this->db->from('geopos_employees');
+        $this->db->where('geopos_employees.id', $id);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
+    public function employee_sale_support()
+    {
+        $this->db->select('geopos_employees.id,geopos_employees.name,geopos_employees.dept');
+        $this->db->from('geopos_employees');
+        $this->db->where('geopos_employees.dept', SALE_SUPPORT);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     public function salary_history($id)
     {
         $this->db->select('*');
