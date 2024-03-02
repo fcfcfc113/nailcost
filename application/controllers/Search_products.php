@@ -71,12 +71,12 @@ class Search_products extends CI_Controller
 
 			if ($billing_settings['key1'] == 2) {
 				$e .= ',geopos_product_serials.serial';
-				$query = $this->db->query("SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_price,geopos_products.product_code,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.qty,geopos_products.unit $e  FROM geopos_product_serials LEFT JOIN geopos_products  ON geopos_products.pid=geopos_product_serials.product_id $join WHERE " . $qw . "(UPPER(geopos_product_serials.serial) LIKE '" . strtoupper($name) . "%')  LIMIT 6");
+				$query = $this->db->query("SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_price,geopos_products.product_code,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.qty,geopos_products.unit $e  FROM geopos_product_serials LEFT JOIN geopos_products  ON geopos_products.pid=geopos_product_serials.product_id $join WHERE " . $qw . "(UPPER(geopos_product_serials.serial) LIKE '%" . strtoupper($name) . "%')  LIMIT 6");
 			} else {
 				$key_arr = explode(" ", $name);
 				if(count($key_arr) == 1)
 				{
-					$query = $this->db->query("SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_price,geopos_products.product_code,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.qty,geopos_products.unit $e  FROM geopos_products $join WHERE " . $qw . "(UPPER(geopos_products.product_name) LIKE '%" . strtoupper($name) . "%') OR (UPPER(geopos_products.product_code) LIKE '" . strtoupper($name) . "%') LIMIT 6");
+					$query = $this->db->query("SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_price,geopos_products.product_code,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.qty,geopos_products.unit $e  FROM geopos_products $join WHERE " . $qw . "(UPPER(geopos_products.product_name) LIKE '%" . strtoupper($name) . "%') OR (UPPER(geopos_products.product_code) LIKE '%" . strtoupper($name) . "%') LIMIT 6");
 				}elseif(count($key_arr) > 1){
 					 $sql = "SELECT geopos_products.pid,geopos_products.product_name,geopos_products.product_price,geopos_products.product_code,geopos_products.taxrate,geopos_products.disrate,geopos_products.product_des,geopos_products.qty,geopos_products.unit $e  FROM geopos_products $join WHERE " . $qw ." ";
 				     $check_and = "AND";
@@ -87,6 +87,7 @@ class Search_products extends CI_Controller
 						}
 						$sql .= "(UPPER(geopos_products.product_name) LIKE '%" . strtoupper($key_arr[$i]) . "%') ".$check_and;
 					}
+					$sql .= " OR (UPPER(geopos_products.product_code) LIKE '%" . strtoupper($name) . "%')";
 					$sql .= "LIMIT 6";
 					$query = $this->db->query($sql);
 				}
