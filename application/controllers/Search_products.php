@@ -87,7 +87,6 @@ class Search_products extends CI_Controller
 						}
 						$sql .= "(UPPER(geopos_products.product_name) LIKE '%" . strtoupper($key_arr[$i]) . "%') ".$check_and;
 					}
-					$sql .= " OR (UPPER(geopos_products.product_code) LIKE '%" . strtoupper($name) . "%')";
 					$sql .= "LIMIT 6";
 					$query = $this->db->query($sql);
 				}
