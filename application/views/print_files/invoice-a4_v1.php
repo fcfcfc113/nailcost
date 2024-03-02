@@ -240,6 +240,9 @@
                 <?php echo $this->lang->line('Price') ?>
             </td>
             <td>
+                <?php echo $this->lang->line('SKU') ?>
+            </td>
+            <td>
                 <?php echo $this->lang->line('Qty') ?>
             </td>
             <?php if ($invoice['tax'] > 0) echo '<td>' . $this->lang->line('Tax') . '</td>';
@@ -266,7 +269,9 @@
             echo '<tr class="item' . $flag . '">  <td>' . $n . '</td>
                             <td>' . $row['product'] . '</td>
 							<td style="width:12%;">' . amountExchange($row['price'], $invoice['multi'], $invoice['loc']) . '</td>
-                            <td style="width:12%;" >' . +$row['qty'] . $row['unit'] . '</td>   ';
+                            <td style="width:12%;" >'.$row['code'].'</td> 
+                            <td style="width:12%;" >' . +$row['qty'] . $row['unit'] . '</td>   
+                            ';
             if ($invoice['tax'] > 0) {
                 $cols++;
                 echo '<td style="width:16%;">' . amountExchange($row['totaltax'], $invoice['multi'], $invoice['loc']) . ' <span class="tax">(' . amountFormat_s($row['tax']) . '%)</span></td>';

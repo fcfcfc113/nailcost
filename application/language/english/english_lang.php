@@ -223,6 +223,7 @@ $lang['Bill From'] = "Bill From";
 $lang['Print Order'] = "Print Order";
 $lang['Order Date'] = "Order Date";
 $lang['Print Quote'] = "Print Quote";
+$lang['SKU'] = "SKU";
 $lang['Quote Date'] = "Quote Date";
 $lang['Valid till'] = "Valid till";
 $lang['Proposal'] = "Proposal";
