@@ -85,6 +85,8 @@ class Quote extends CI_Controller
         $data['terms'] = $this->quote->billingterms();
         $data['invoice'] = $this->quote->quote_details($tid);
         $data['products'] = $this->quote->quote_products($tid);
+        $data['employees'] = $this->quote->employee_by_quote($tid);
+
         $data['currency'] = $this->quote->currencies();
         $role_id = $this->aauth->get_user()->roleid;
         $data['check_role_discount'] = ($role_id == 2) ? "disabled" : "" ;
@@ -92,6 +94,8 @@ class Quote extends CI_Controller
         $head['title'] = "Edit Quote #" . $data['invoice']['tid'];
         $head['usernm'] = $this->aauth->get_user()->username;
         $data['warehouse'] = $this->quote->warehouses();
+        $data['list_sale_support'] =  $this->employee->employee_sale_support();
+        
         $this->load->model('plugins_model', 'plugins');
         $data['exchange'] = $this->plugins->universal_api(5);
         $this->load->library("Common");

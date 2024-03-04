@@ -77,6 +77,16 @@ class Quote_model extends CI_Model
 
     }
 
+    public function employee_by_quote($id){
+        $this->db->select('geopos_quotes.eid,geopos_quotes.parent_eid,employee1.name as employee,employee2.name as sale_support');
+        $this->db->from($this->table);
+        $this->db->where('geopos_quotes.id', $id);
+        $this->db->join('geopos_employees as employee1','employee1.id = geopos_quotes.eid','left');
+        $this->db->join('geopos_employees as employee2','employee2.id = geopos_quotes.parent_eid','left');
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     public function quote_products($id)
     {
 

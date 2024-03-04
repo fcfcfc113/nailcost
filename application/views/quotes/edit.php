@@ -269,7 +269,29 @@
                                 </tr>
 
                                 <tr class="sub_c" style="display: table-row;">
-                                    <td colspan="2"><?php if ($exchange['active'] == 1){
+                                <?php var_dump($employees)?>
+                                    <td colspan="2">
+                                        Employees
+                                        <select name="employee" id="employee" class="selectpicker form-control">                               
+                                            <option value="<?= $employees['eid']?>" selected><?= $employees['employee']?></option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr class="sub_c" style="display: table-row;">
+                                    <td colspan="2">
+                                        Sale Support
+                                        <select name="sale_support" id="sale_support" class="selectpicker form-control">
+                                            <option value="<?= $employees['parent_eid']?>" selected><?= $employees['sale_support']?></option>
+                                            <?php foreach ($list_sale_support as $sale_sup) {?>
+                                            <option value="<?= $sale_sup['id']?>"><?= $sale_sup['name']?></option>
+                                            <?php }?>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr class="sub_c" style="display: table-row;">
+                                    <td colspan="2" ><?php if ($exchange['active'] == 1){
                                         echo $this->lang->line('Payment Currency client') . ' <small>' . $this->lang->line('based on live market') ?></small>
                                         <select name="mcurrency"
                                                 class="selectpicker form-control">
@@ -281,7 +303,8 @@
                                                 echo '<option value="' . $row['id'] . '">' . $row['symbol'] . ' (' . $row['code'] . ')</option>';
                                             } ?>
 
-                                        </select><?php } ?></td>
+                                        </select><?php } ?>
+                                    </td>
                                     <td colspan="4" align="right"><strong><?php echo $this->lang->line('Grand Total') ?>
                                             (<span
                                                     class="currenty lightMode"><?php echo $this->config->item('currency'); ?></span>)</strong>
