@@ -234,7 +234,28 @@ class Quote_model extends CI_Model
         $productlist = array();
         $prodindex = 0;
         if($invoice['loc']==$this->aauth->get_user()->loc) {
-            $data = array('tid' => $iid, 'invoicedate' => $invoice['invoicedate'], 'invoiceduedate' => $invoice['invoicedate'], 'subtotal' => $invoice['invoicedate'], 'shipping' => $invoice['shipping'], 'discount' => $invoice['discount'], 'tax' => $invoice['tax'], 'total' => $invoice['total'], 'notes' => $invoice['notes'], 'csd' => $invoice['csd'], 'eid' => $invoice['eid'], 'items' => $invoice['items'], 'taxstatus' => $invoice['taxstatus'], 'discstatus' => $invoice['discstatus'], 'format_discount' => $invoice['format_discount'], 'refer' => $invoice['refer'], 'term' => $invoice['term'],'multi' => $invoice['multi'], 'loc' => $invoice['loc']);
+            $data = array(
+                'tid' => $iid, 
+                'invoicedate' => $invoice['invoicedate'], 
+                'invoiceduedate' => $invoice['invoicedate'], 
+                'subtotal' => $invoice['invoicedate'], 
+                'shipping' => $invoice['shipping'], 
+                'discount' => $invoice['discount'], 
+                'tax' => $invoice['tax'], 
+                'total' => $invoice['total'], 
+                'notes' => $invoice['notes'], 
+                'csd' => $invoice['csd'], 
+                'eid' => $invoice['eid'],
+                'parent_eid' => $invoice['parent_eid'],  
+                'items' => $invoice['items'], 
+                'taxstatus' => $invoice['taxstatus'], 
+                'discstatus' => $invoice['discstatus'], 
+                'format_discount' => $invoice['format_discount'], 
+                'refer' => $invoice['refer'], 
+                'term' => $invoice['term'],
+                'multi' => $invoice['multi'], 
+                'loc' => $invoice['loc']
+            );
             $this->db->insert('geopos_invoices', $data);
             $iid = $this->db->insert_id();
             foreach ($products as $row) {

@@ -33,7 +33,8 @@
                             <a href="<?php echo 'edit?id=' . $invoice['iid']; ?>" class="btn btn-warning mb-1"><i
                                         class="fa fa-pencil"></i> <?php echo $this->lang->line('Edit Invoice') ?></a>
                                         
-                            <a href="#part_payment"  class="btn btn-large btn-info mb-1 custom-btn-disabled " data-bs-toggle="tooltip" title="Get out !"><span class="fa fa-money"></span> <?php echo $this->lang->line('Make Payment') ?> </a>
+                            <a href="#part_payment"  class="btn btn-large btn-info mb-1 <?= $role_check?>" data-bs-toggle="tooltip" title="Get out !"
+                            <?= $role_check_style ?>    ><span class="fa fa-money"></span> <?php echo $this->lang->line('Make Payment') ?> </a>
 
                             <div class="btn-group">
                                 <button type="button" class="btn btn-facebook dropdown-toggle mb-1"

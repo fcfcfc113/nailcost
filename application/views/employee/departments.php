@@ -38,20 +38,7 @@
                     <tbody>
                     <?php $i = 1;
 
-                    foreach ($department_list as $row) {
-                        $aid = $row['id'];
-                        $username = $row['val1'];
-                        $name = $row['val2'];
-
-
-                        echo "<tr>
-<td>" . $i . "</td>
-                    <td>" . $row['val1'] . "</td>
-                    
-                 
-                    <td><a href='" . base_url("employee/department?id=$aid") . "' class='btn btn-success btn-sm'><i class='fa fa-eye'></i> " . $this->lang->line('View') . "</a> <a href='" . base_url("employee/editdep?id=$aid") . "' class='btn btn-blue  btn-sm'><i class='fa fa-pencil'></i> " . $this->lang->line('Edit') . "</a> <a href='#' data-object-id='$aid' class='btn btn-danger btn-sm delete-object  btn-sm'><span class='fa fa-trash'></span></a></td></tr>";
-                        $i++;
-                    }
+v
                     ?>
                     </tbody>
                     <tfoot>

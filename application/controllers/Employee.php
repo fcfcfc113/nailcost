@@ -745,6 +745,9 @@ class Employee extends CI_Controller
 
         $head['usernm'] = $this->aauth->get_user()->username;
         $data['department_list'] = $this->employee->department_list($this->aauth->get_user()->loc);
+        $role = $this->aauth->get_user()->roleid;
+        $data['role_check'] = ($role != 5) ? "disabled" : "" ;
+        $data['role_check_style'] = ($role != 5) ? "style='opacity:20%'" : "" ;
         $head['title'] = 'Departments';
         $this->load->view('fixed/header', $head);
         $this->load->view('employee/departments', $data);

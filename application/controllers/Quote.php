@@ -310,6 +310,10 @@ class Quote extends CI_Controller
         $data['products'] = $this->quote->quote_products($tid);
         $data['attach'] = $this->quote->attach($tid);
         $data['employee'] = $this->quote->employee($data['invoice']['eid']);
+        $role = $this->aauth->get_user()->roleid;
+        $data['role_check'] = ($role == 2 || $role == 3 ) ? "disabled" : "";
+        $data['role_check_style'] = ($role == 2 || $role == 3 ) ? "style='opacity:20%'" : "";
+
         $head['title'] = "Quote #" . $data['invoice']['tid'];
         $head['usernm'] = $this->aauth->get_user()->username;
         $this->load->view('fixed/header', $head);

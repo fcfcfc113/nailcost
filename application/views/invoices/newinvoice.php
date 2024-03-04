@@ -288,13 +288,16 @@
                                         <?php foreach ($employee as $row) {
                                             echo '<option value="' . $row['id'] . '">' . $row['name'] . ' (' . $row['name'] . ')</option>';
                                         } ?>
-                                    </select><?php } ?><br>
-                                    <div class="comission">
-                                        <div class="product-comission">
-                                            <p>*Total Commission Order : <a href="">20$</a></p>
-                                            <p>*Total Commission Products : <a href="">2$</a></p>
-                                        </div>
-                                    </div>
+                                    </select><?php } ?>
+                                    <br>
+                                    Sale Support
+                                    <select name="sale_support" id="sale_support" class=" selectpicker form-control">
+                                        <option value="0"></option>
+                                        <?php foreach ($list_sale_support as $row) {?>
+                                            <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                        <?php }?>
+                                    </select>
+
                                     <?php if ($exchange['active'] == 1){
                                     echo $this->lang->line('Payment Currency client') . ' <small>' . $this->lang->line('based on live market') ?></small>
                                     <select name="mcurrency"

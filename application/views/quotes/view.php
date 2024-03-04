@@ -1,3 +1,12 @@
+<style>
+    .test {
+    background-color: #f2f2f2; 
+    color: #999;
+    border: 1px solid #ccc; 
+    cursor: not-allowed; 
+    opacity: 0.6; 
+    }
+</style>
 <div class="content-body">
     <div class="card">
         <div class="card-content">
@@ -24,11 +33,11 @@
                             ><span class="fa fa-retweet"></span> <?php echo $this->lang->line('Change Status') ?> </a>
 
                             <a href="#pop_model2" data-toggle="modal" data-remote="false"
-                               class="btn btn-large btn-info mb-1" title="Convert to Invoice"
+                               class="btn btn-large btn-info mb-1 opacity-10 <?= $role_check ?>" title="Convert to Invoice" <?= $role_check_style?>
                             ><span class="fa fa-share"></span> <?php echo $this->lang->line('Convert to Invoice') ?>
                             </a>
                                <a href="#pop_model3" data-toggle="modal" data-remote="false"
-                               class="btn btn-large btn-blue-grey mb-1" title="Convert to Purchase"
+                               class="btn btn-large btn-blue-grey mb-1 <?= $role_check?>" title="Convert to Purchase" <?= $role_check_style?>
                             ><span class="fa fa-share"></span> <?php echo $this->lang->line('Convert to Purchase') ?>
                             </a>
 

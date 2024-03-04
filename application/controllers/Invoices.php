@@ -74,6 +74,8 @@ class Invoices extends CI_Controller
         $head['usernm'] = $this->aauth->get_user()->username;
         $data['taxdetails'] = $this->common->taxdetail();
         $data['custom_fields'] = $this->custom->add_fields(2);
+        $data['list_sale_support'] =  $this->employee->employee_sale_support();
+
         $this->load->view('fixed/header', $head);
         $this->load->view('invoices/newinvoice', $data);
         $this->load->view('fixed/footer');
@@ -415,7 +417,9 @@ class Invoices extends CI_Controller
         $data['invoice'] = $this->invocies->invoice_details($tid, $this->limited);
         $data['attach'] = $this->invocies->attach($tid);
         $data['c_custom_fields'] = $this->custom->view_fields_data($data['invoice']['cid'], 1);
-        $data['is_disabled'] = ($this->aauth->get_user()->roleid == 2) ? 'disabled' : "";
+        $role = $this->aauth->get_user()->roleid;
+        $data['role_check'] = ($role == 2 || $role == 3 ) ? "disabled" : "";
+        $data['role_check_style'] = ($role == 2 || $role == 3 ) ? "style='opacity:20%'" : "";
         $head['usernm'] = $this->aauth->get_user()->username;
         $head['title'] = "Invoice " . $data['invoice']['tid'];
         $this->load->view('fixed/header', $head);
