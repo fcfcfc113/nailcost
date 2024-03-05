@@ -279,6 +279,7 @@ class Quote extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = '<a href="' . base_url("quote/view?id=$invoices->id") . '">&nbsp; ' . $invoices->tid . '</a>';
+            $row[] = $invoices->refer;
             $row[] = $invoices->name;
             $row[] = (!empty($employee) || $employee != NULL ) ? $employee['name'] : "";
             $row[] = (!empty($sale_support) || $sale_support != NULL) ? $sale_support['name'] : "";

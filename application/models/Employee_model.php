@@ -66,6 +66,7 @@ class Employee_model extends CI_Model
         $this->db->from('geopos_employees');
         $this->db->where('geopos_employees.id', $id);
         $query = $this->db->get();
+        
         return $query->row_array();
     }
 
@@ -77,6 +78,15 @@ class Employee_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function get_employee_name_id()
+    {
+        $this->db->select('geopos_employees.id,geopos_employees.name,geopos_employees.dept');
+        $this->db->from('geopos_employees');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function salary_history($id)
     {
         $this->db->select('*');

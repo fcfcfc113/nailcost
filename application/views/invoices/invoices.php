@@ -44,7 +44,10 @@
                     <tr>
                         <th><?php echo $this->lang->line('No') ?></th>
                         <th><?php echo $this->lang->line('Invoice') ?>#</th>
+                        <th><?php echo $this->lang->line('Reference') ?></th>
                         <th><?php echo $this->lang->line('Customer') ?></th>
+                        <th><?php echo $this->lang->line('Employees') ?></th>
+                        <th><?php echo $this->lang->line('Sale Support') ?></th>
                         <th><?php echo $this->lang->line('Date') ?></th>
                         <th><?php echo $this->lang->line('Amount') ?></th>
                         <th><?php echo $this->lang->line('Status') ?></th>
@@ -60,9 +63,11 @@
                     <tr>
                         <th><?php echo $this->lang->line('No') ?></th>
                         <th><?php echo $this->lang->line('Invoice') ?>#</th>
+                        <th><?php echo $this->lang->line('Reference') ?></th>
                         <th><?php echo $this->lang->line('Customer') ?></th>
+                        <th><?php echo $this->lang->line('Employees') ?></th>
+                        <th><?php echo $this->lang->line('Sale Support') ?></th>
                         <th><?php echo $this->lang->line('Date') ?></th>
-
                         <th><?php echo $this->lang->line('Amount') ?></th>
                         <th><?php echo $this->lang->line('Status') ?></th>
                         <th class="no-sort"><?php echo $this->lang->line('Settings') ?></th>

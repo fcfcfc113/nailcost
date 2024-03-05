@@ -150,6 +150,8 @@ class Invoices extends CI_Controller
         $total_tax = 0;
         $total_discount = rev_amountExchange_s($this->input->post('after_disc'), $currency, $this->aauth->get_user()->loc);
         $discountFormat = $this->input->post('discountFormat');
+        $sale_support = $this->input->post('sale_support');
+
         $pterms = $this->input->post('pterms', true);
         $i = 0;
         if ($discountFormat == '0') {
@@ -196,8 +198,30 @@ class Invoices extends CI_Controller
             $invocieno=$query->row()->tid+1;
         }
 
-        $data = array('tid' => $invocieno, 'invoicedate' => $bill_date, 'invoiceduedate' => $bill_due_date, 'subtotal' => $subtotal, 'shipping' => $shipping, 'ship_tax' => $shipping_tax, 'ship_tax_type' => $ship_taxtype, 'discount_rate' => $disc_val, 'total' => $total, 'notes' => $notes, 'csd' => $customer_id, 'eid' => $emp, 'taxstatus' => $tax, 'discstatus' => $discstatus, 'format_discount' => $discountFormat, 'refer' => $refer, 'term' => $pterms, 'multi' => $currency, 'loc' => $this->aauth->get_user()->loc);
+        $data = array(
+        'tid' => $invocieno, 
+        'invoicedate' => $bill_date, 
+        'invoiceduedate' => $bill_due_date, 
+        'subtotal' => $subtotal, 
+        'shipping' => $shipping, 
+        'ship_tax' => $shipping_tax, 
+        'ship_tax_type' => $ship_taxtype, 
+        'discount_rate' => $disc_val, 
+        'total' => $total, 
+        'notes' => $notes, 
+        'csd' => $customer_id, 
+        'eid' => $emp, 
+        'parent_eid' => $sale_support, 
+        'taxstatus' => $tax, 
+        'discstatus' => $discstatus, 
+        'format_discount' => $discountFormat, 
+        'refer' => $refer, 
+        'term' => $pterms, 
+        'multi' => $currency, 
+        'loc' => $this->aauth->get_user()->loc
+    );
         $invocieno2 = $invocieno;
+        //$this->db->insert('geopos_invoices', $data);
 		//$data['status']='due';
         if ($this->db->insert('geopos_invoices', $data)) {
             $invocieno = $this->db->insert_id();
@@ -386,13 +410,16 @@ class Invoices extends CI_Controller
         $list = $this->invocies->get_datatables($this->limited);
         $data = array();
         $no = $this->input->post('start');
+
         foreach ($list as $invoices) {
             $no++;
             $row = array();
             $row[] = $no;
-
             $row[] = '<a href="' . base_url("invoices/view?id=$invoices->id") . '">&nbsp; ' . $invoices->tid . '</a>';
+            $row[] = $invoices->refer;
             $row[] = $invoices->name;
+            $row[] = $invoices->employee;
+            $row[] = $invoices->sale_support;
             $row[] = dateformat($invoices->invoicedate);
             $row[] = amountExchange($invoices->total, 0, $this->aauth->get_user()->loc);
             $row[] = '<span class="st-' . $invoices->status . '">' . $this->lang->line(ucwords($invoices->status)) . '</span>';

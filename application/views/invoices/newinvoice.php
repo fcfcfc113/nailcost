@@ -283,7 +283,7 @@
                                 ?><br>
                                     <select name="employee"
                                     
-                                            class=" mt-1 col form-control form-control-sm">
+                                            class=" selectpicker form-control">
 
                                         <?php foreach ($employee as $row) {
                                             echo '<option value="' . $row['id'] . '">' . $row['name'] . ' (' . $row['name'] . ')</option>';
